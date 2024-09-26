@@ -16,7 +16,6 @@ const Login = ({ setisAuthenticated }) => {
         email,
         password,
       });
-      console.log(response);
       localStorage.setItem("token", response.data.token);
       setisAuthenticated(true);
       navigate("/");

@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import Header from "./components/Header";
-import ThemeSwitcher from "./components/ThemeSwitcher";
 import Register from "./pages/Register";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Login from "./pages/Login";
@@ -13,12 +11,9 @@ const App = () => {
     if (token) {
       setisAuthenticated(true);
     }
-  }, []);
+  },[]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setisAuthenticated(false);
-  };
+  
 
   return (
     <Router>
@@ -30,7 +25,6 @@ const App = () => {
           element={<Login setisAuthenticated={setisAuthenticated} />}
         />
       </Routes>
-      {/* <ThemeSwitcher /> */}
     </Router>
   );
 };

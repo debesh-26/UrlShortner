@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./URLShortener.css";
+import { MdDeleteForever } from "react-icons/md";
 
 const URLShortener = () => {
   const [url, setUrl] = useState("");
   const [shortenedUrls, setShortenedUrls] = useState([]);
   const [error, setError] = useState("");
-   
+
   const fetchUrls = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -45,11 +46,10 @@ const URLShortener = () => {
           },
         }
       );
-      console.log(response);
       const newShortenedUrl = {
-        _id: new Date().getTime(), // Generate a temporary ID
-        shortid: response.data.id,
-        redirectUrl: url, // URL entered by the user
+        _id: response.data._id, // Generate a temporary ID
+        shortid: response.data.shortid,
+        redirectUrl: response.data.redirectUrl, // URL entered by the user
         visitedHistory: [], // No clicks initially
         createdAt: new Date().toISOString(), // Current timestamp
         clicks: 0, // Start with 0 clicks
@@ -98,20 +98,39 @@ const URLShortener = () => {
     }
   };
 
+  //deleting the url
+  const handleDelete = async (id) => {
+    try {
+      const token = localStorage.getItem("token");
+
+       await axios.delete(`https://urlshortner-2ndt.onrender.com/url/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const updatedUrl = shortenedUrls.filter((url) => url._id !== id);
+      setShortenedUrls(updatedUrl);
+    } catch (error) {
+      console.log(shortenedUrls);
+      console.error("Error deleting URL", error);
+    }
+  };
+
   return (
     <div className="url-shortener">
       <div className="box">
-      <h2>Paste the URL to be shortened </h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Enter the link here"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-        />
-        <button type="submit">Shorten Now!</button>
-      </form>
+        <h2>Paste the URL to be shortened </h2>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Enter the link here"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+          />
+          <button type="submit">Shorten Now!</button>
+        </form>
       </div>
 
       <table className="shortened-urls">
@@ -122,6 +141,7 @@ const URLShortener = () => {
             <th>Clicks</th>
             <th>Status</th>
             <th>Date</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -138,7 +158,6 @@ const URLShortener = () => {
               <td>{url.date}</td>
             </tr>
           ))} */}
-
           {shortenedUrls.map((url, index) => (
             <tr key={index}>
               <td>
@@ -155,6 +174,12 @@ const URLShortener = () => {
               <td>{url.visitedHistory.length}</td>
               <td>Active</td> {/* Assuming all URLs are active */}
               <td>{new Date(url.createdAt).toLocaleDateString()}</td>
+              <td>
+                <MdDeleteForever
+                  size={20}
+                  onClick={() => handleDelete(url._id)}
+                />
+              </td>
             </tr>
           ))}
         </tbody>

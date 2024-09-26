@@ -12,7 +12,7 @@ const Login = ({ setisAuthenticated }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/auth/login", {
+      const response = await axios.post("https://urlshortner-2ndt.onrender.com/auth/login", {
         email,
         password,
       });

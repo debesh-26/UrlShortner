@@ -10,7 +10,7 @@ const URLShortener = () => {
   const fetchUrls = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("http://localhost:3000/url/user", {
+      const response = await axios.get("https://urlshortner-2ndt.onrender.com/url/user", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -37,7 +37,7 @@ const URLShortener = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "http://localhost:3000/url",
+        "https://urlshortner-2ndt.onrender.com/url",
         { url },
         {
           headers: {
@@ -73,7 +73,7 @@ const URLShortener = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `http://localhost:3000/url/analytics/${shortId}`,
+        `https://urlshortner-2ndt.onrender.com/url/analytics/${shortId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -102,6 +102,7 @@ const URLShortener = () => {
     <div className="url-shortener">
       <div className="box">
       <h2>Paste the URL to be shortened </h2>
+      {error && <p style={{ color: "red" }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -142,12 +143,12 @@ const URLShortener = () => {
             <tr key={index}>
               <td>
                 <a
-                  href={`http://localhost:3000/${url.shortid}`}
+                  href={`https://urlshortner-2ndt.onrender.com/${url.shortid}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => handleLinkClick(url.shortid)}
                 >
-                  {`http://localhost:3000/${url.shortid}`}
+                  {`https://urlshortner-2ndt.onrender.com/${url.shortid}`}
                 </a>
               </td>
               <td>{url.redirectUrl}</td>

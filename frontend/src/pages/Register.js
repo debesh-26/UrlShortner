@@ -11,7 +11,7 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:3000/auth/register", {
+      await axios.post("https://urlshortner-2ndt.onrender.com/auth/register", {
         email,
         password,
       });

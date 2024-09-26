@@ -13,7 +13,7 @@ const App = () => {
     }
   },[]);
 
-  
+  console.log(isauthenticated);
 
   return (
     <Router>

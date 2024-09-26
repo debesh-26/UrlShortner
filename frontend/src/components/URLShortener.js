@@ -132,7 +132,7 @@ const URLShortener = () => {
           <button type="submit">Shorten Now!</button>
         </form>
       </div>
-
+      <p style={{fontSize:"20px",fontWeight:"500",color:"rgb(31, 169, 185)"}}>Your Generated Urls Are Here</p>
       <table className="shortened-urls">
         <thead>
           <tr>
@@ -145,19 +145,6 @@ const URLShortener = () => {
           </tr>
         </thead>
         <tbody>
-          {/* {shortenedUrls.map((url, index) => (
-            <tr key={index}>
-              <td>
-                <a href={url.shortLink} target="_blank" rel="noopener noreferrer">
-                  {url.shortLink}
-                </a>
-              </td>
-              <td>{url.originalLink}</td>
-              <td>{url.clicks}</td>
-              <td>{url.status}</td>
-              <td>{url.date}</td>
-            </tr>
-          ))} */}
           {shortenedUrls.map((url, index) => (
             <tr key={index}>
               <td>
@@ -176,7 +163,7 @@ const URLShortener = () => {
               <td>{new Date(url.createdAt).toLocaleDateString()}</td>
               <td>
                 <MdDeleteForever
-                  size={20}
+                  className="icons"
                   onClick={() => handleDelete(url._id)}
                 />
               </td>

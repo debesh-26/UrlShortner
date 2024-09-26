@@ -1,6 +1,7 @@
 # URL Shortener
 
 A simple and efficient **URL Shortener** application built using the **MERN stack** (MongoDB, Express, React, Node.js). This app allows users to shorten long URLs, track the number of clicks, and provides a login system for managing and tracking user-specific shortened links.
+# Check The Live link - [Click](https://url-shortner-nine-woad.vercel.app/)
 
 ## 🚀 Features
 
@@ -26,8 +27,6 @@ A simple and efficient **URL Shortener** application built using the **MERN stac
 URL-Shortener/
 ├── backend/             # Backend API (Node.js & Express)
 ├── frontend/            # Frontend (React.js)
-├── .env                 # Environment variables
-├── README.md            # Project documentation
-└── package.json         # Project metadata and dependencies
+
 
 

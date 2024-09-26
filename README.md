@@ -9,9 +9,8 @@ A simple and efficient **URL Shortener** application built using the **MERN stac
 - 📊 **Track Clicks**: Get analytics on how many times a shortened link has been clicked.
 - 🔐 **User Authentication**: Register and log in to track and manage your own shortened links.
 - 🗄 **Database**: MongoDB stores URL data and user information.
-- 🧠 **Caching**: Local storage caching ensures faster performance by avoiding repeated API calls.
 - 📅 **User-Specific Links**: Users can view all the URLs they have shortened after logging in.
-- 🛠️ **Click Analytics**: Links track how many clicks they’ve received in real-time.
+- 🛠️ **Analytics**: Links track how many clicks they’ve received in real-time.
 
 ## 🛠️ Tech Stack
 
@@ -19,7 +18,7 @@ A simple and efficient **URL Shortener** application built using the **MERN stac
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB
 - **Authentication**: JWT (JSON Web Token)
-- **Deployment**: [Vercel](https://vercel.com/) for frontend, [Heroku](https://heroku.com/) for backend
+- **Deployment**: [Vercel]([https://vercel.com/](https://url-shortner-nine-woad.vercel.app/)) for frontend, [Render] for backend
 
 ## 📂 Project Structure
 

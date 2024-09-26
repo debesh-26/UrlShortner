@@ -1,0 +1,31 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0.5rem;
+    background-color: rgb(31, 169, 185);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; 
+    height: 70px;
+  }
+  
+  .auth-buttons button {
+    margin-left: 1rem;
+    padding: 0.6rem 1rem;
+    border: none;
+    background-color: #101110;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100px;
+  }
+
+  .auth-buttons button:hover{
+    background-color: #272827;
+  }
+  
+ 
+  

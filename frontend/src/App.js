@@ -13,7 +13,9 @@ const App = () => {
     }
   },[]);
 
-  console.log(isauthenticated);
+  if(isauthenticated){
+    console.log("Everything Is Fine")
+  }
 
   return (
     <Router>

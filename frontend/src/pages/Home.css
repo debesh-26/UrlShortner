@@ -10,6 +10,10 @@
     animation: gradient-animation 10s ease infinite;
 }
 
+.free{
+    color: rgb(157, 58, 58);
+}
+
 /* Main content styling */
 .mainbody {
     display: flex;

@@ -7,6 +7,7 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
 const authRouter = require("./routes/auth");
+const paymentRouter = require("./routes/paymentRoutes");
 
 require("dotenv").config();
 
@@ -23,6 +24,7 @@ handleConnection(process.env.MONGO_URL).then(() =>
 
 app.use("/url", urlRouter);
 app.use("/auth", authRouter);
+app.use("/payment", paymentRouter);
 app.get("/:shortid", async (req, res) => {
   const shortid = req.params.shortid;
   console.log("shortId received:", shortid);
@@ -33,9 +35,8 @@ app.get("/:shortid", async (req, res) => {
     { new: true } // returns the updated document
   );
 
- 
-    return res.redirect(result.redirectUrl);
-  
+  return res.redirect(result.redirectUrl);
 });
+const PORT = process.env.PORT || 3000;
 
-app.listen(3000, () => console.log("server connected at port 3000"));
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

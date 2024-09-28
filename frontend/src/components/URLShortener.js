@@ -7,6 +7,9 @@ const URLShortener = () => {
   const [url, setUrl] = useState("");
   const [shortenedUrls, setShortenedUrls] = useState([]);
   const [error, setError] = useState("");
+  const [limitExceeded, setLimitExceeded] = useState(false);
+  const [paymentProcessing, setPaymentProcessing] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
   const fetchUrls = async () => {
     try {
@@ -46,20 +49,86 @@ const URLShortener = () => {
           },
         }
       );
-      const newShortenedUrl = {
-        _id: response.data._id, // Generate a temporary ID
-        shortid: response.data.shortid,
-        redirectUrl: response.data.redirectUrl, // URL entered by the user
-        visitedHistory: [], // No clicks initially
-        createdAt: new Date().toISOString(), // Current timestamp
-        clicks: 0, // Start with 0 clicks
-        status: "Active", // Default status
-      };
+      if (
+        response.data.msg === "Free limit exceeded. Please upgrade to continue."
+      ) {
+        setLimitExceeded(true);
+        setShowPopup(true);
+      } else {
+        const newShortenedUrl = {
+          _id: response.data._id, // Generate a temporary ID
+          shortid: response.data.shortid,
+          redirectUrl: response.data.redirectUrl, // URL entered by the user
+          visitedHistory: [], // No clicks initially
+          createdAt: new Date().toISOString(), // Current timestamp
+          clicks: 0, // Start with 0 clicks
+          status: "Active", // Default status
+        };
 
-      setShortenedUrls((prev) => [...prev, newShortenedUrl]);
-      setUrl("");
+        setShortenedUrls((prev) => [...prev, newShortenedUrl]);
+        setUrl("");
+      }
     } catch (error) {
       setError("Failed to shorten the URL");
+    }
+  };
+
+  const handlePayment = async () => {
+    setPaymentProcessing(true);
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await axios.post(
+        "https://urlshortner-2ndt.onrender.com/payment/create-checkout-session",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      // Check if Razorpay is available
+      if (!window.Razorpay) {
+        alert("Razorpay SDK failed to load. Are you online?");
+        setPaymentProcessing(false);
+        return;
+      }
+
+      const options = {
+        key: process.env.REACT_APP_RAZORPAY_KEY_ID, // Use Razorpay key from .env
+        amount: response.data.amount,
+        currency: "INR",
+        name: "URL Shortener Premium Plan",
+        description: "Payment for exceeding the free limit",
+        order_id: response.data.orderId, // Razorpay order ID
+        handler: async function (paymentResponse) {
+          // Handle the payment success
+          await axios.post(
+            "https://urlshortner-2ndt.onrender.com/payment/payment-success",
+            {
+              paymentId: paymentResponse.razorpay_payment_id,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          alert(
+            "Payment successful! You can now continue creating short URLs."
+          );
+          setLimitExceeded(false); // Reset the limit exceeded state
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+      const razorpay = new window.Razorpay(options);
+      razorpay.open();
+    } catch (error) {
+      console.error("Error creating order for payment", error);
+    } finally {
+      setPaymentProcessing(false);
     }
   };
 
@@ -103,7 +172,7 @@ const URLShortener = () => {
     try {
       const token = localStorage.getItem("token");
 
-       await axios.delete(`https://urlshortner-2ndt.onrender.com/url/${id}`, {
+      await axios.delete(`https://urlshortner-2ndt.onrender.com/url/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -112,16 +181,21 @@ const URLShortener = () => {
       const updatedUrl = shortenedUrls.filter((url) => url._id !== id);
       setShortenedUrls(updatedUrl);
     } catch (error) {
-      console.log(shortenedUrls);
       console.error("Error deleting URL", error);
     }
   };
+  const closePopup = () => {
+    setShowPopup(false); // Close popup on button click
+  };
+
+ 
+  
 
   return (
     <div className="url-shortener">
       <div className="box">
-        <h2>Paste the URL to be shortened </h2>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        <h2 >Paste the URL to be shortened </h2>
+        {error && <p className="error" style={{ color: "red" }}>{error}</p>}
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -129,10 +203,35 @@ const URLShortener = () => {
             value={url}
             onChange={(e) => setUrl(e.target.value)}
           />
-          <button type="submit">Shorten Now!</button>
+          <button type="submit" className="btn">Shorten Now!</button>
         </form>
       </div>
-      <p style={{fontSize:"20px",fontWeight:"500",color:"rgb(31, 169, 185)"}}>Your Generated Urls Are Here</p>
+      {showPopup && limitExceeded && (
+        <div className="popup-overlay">
+          <div className="popup-content">
+            <button className="close-button" onClick={closePopup}>
+              &times;
+            </button>
+            <p className="msg">Your free limit is exceeded. Please make a payment to continue.</p>
+            <button
+              onClick={handlePayment}
+              disabled={paymentProcessing}
+              className="make-payment-button"
+            >
+              {paymentProcessing ? "Processing..." : "Make Payment"}
+            </button>
+          </div>
+        </div>
+      )}
+      <p
+        style={{
+          fontSize: "20px",
+          fontWeight: "500",
+          color: "rgb(31, 169, 185)",
+        }}
+      >
+        Your Generated Urls Are Here
+      </p>
       <table className="shortened-urls">
         <thead>
           <tr>
@@ -149,12 +248,12 @@ const URLShortener = () => {
             <tr key={index}>
               <td>
                 <a
-                  href={`https://urlshortner-2ndt.onrender.com/${url.shortid}`}
+                  href={`http://localhost:3000/${url.shortid}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => handleLinkClick(url.shortid)}
                 >
-                  {`https://urlshortner-2ndt.onrender.com/${url.shortid}`}
+                  {`http://localhost:3000/${url.shortid}`}
                 </a>
               </td>
               <td>{url.redirectUrl}</td>

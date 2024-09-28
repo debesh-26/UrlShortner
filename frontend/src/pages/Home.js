@@ -24,7 +24,7 @@ const Home = () => {
       ) : (
         <div className="body">
           <h3>Sign Up for Free and Manage Your Links</h3>
-          <h1>"Shorten Your First Link Now with ClipLink !"</h1>
+          <h1>"Shorten Your First <b className="free">5 Free</b> Link Now with ClipLink !"</h1>
           <div className="mainbody">
             <FaRegThumbsUp className="icon" />
             <div className="mainbody1">

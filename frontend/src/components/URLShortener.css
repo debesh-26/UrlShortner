@@ -11,6 +11,11 @@
   border-radius: 6px; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
   padding: 1rem 0rem;
+
+}
+.error{
+  text-align: center;
+  margin-bottom: 20px;
 }
   
   .url-shortener h2 {
@@ -28,7 +33,7 @@
     width: 60%;
   }
   
-  .url-shortener button {
+  .btn {
     padding: 0.5rem 1rem;
     background-color: rgb(31, 169, 185);
     color: white;
@@ -62,3 +67,143 @@
     color: red;
     cursor: pointer;
   }
+
+
+  * For Popup Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it appears on top */
+}
+
+/* For Popup Content */
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 400px;
+  position: relative;
+  text-align: center;
+  z-index: 1001;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.3s ease;
+}
+
+.close-button:hover {
+  color: #333;
+}
+
+/* Make Payment Button and popup */
+
+/* For Popup Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it appears on top */
+  backdrop-filter: blur(5px); /* Background blur effect */
+}
+
+/* For Popup Content */
+.popup-content {
+  background-color: white;
+  padding: 30px; /* Increased padding for a bigger popup */
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Deeper shadow for emphasis */
+  width: 500px; /* Increased width for bigger popup */
+  height: auto;
+  position: relative;
+  text-align: center;
+  z-index: 1001;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* For Close Button (Cross) */
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px; /* Bigger cross button */
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.3s ease;
+}
+
+.close-button:hover {
+  color: #333;
+}
+
+/* Make Payment Button */
+.make-payment-button {
+  display: inline-block;
+  padding: 14px 28px; /* Slightly bigger button */
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(45deg, #ff416c, #ff4b2b);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 15px rgba(255, 75, 43, 0.5);
+  margin-top: 20px;
+}
+
+.make-payment-button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(45deg, #ff4b2b, #ff416c);
+}
+
+.make-payment-button:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Animation for popup */
+.popup-content {
+  animation: popupFadeIn 0.5s ease;
+}
+
+@keyframes popupFadeIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.msg{
+  font-size:large;
+  font-weight: 500;
+}

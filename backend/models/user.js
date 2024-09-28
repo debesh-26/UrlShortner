@@ -17,6 +17,14 @@ const userSchema = new mongoose.Schema({
       ref: "urlShortner",
     },
   ],
+  urlLimit: {
+    type: Number,
+    default: 5,
+  },
+  paidService: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 // Hash the password before saving
@@ -28,8 +36,8 @@ userSchema.pre("save", async function (next) {
 
 // Compare hashed passwords
 userSchema.methods.comparePassword = async function (candidatePassword) {
-    return await bcrypt.compare(candidatePassword, this.password);
-  };
-  
-  const User = mongoose.model('User', userSchema);
-  module.exports = User;
+  return await bcrypt.compare(candidatePassword, this.password);
+};
+
+const User = mongoose.model("User", userSchema);
+module.exports = User;

@@ -11,6 +11,8 @@ A simple and efficient **URL Shortener** application built using the **MERN stac
 - 🗄 **Database**: MongoDB stores URL data and user information.
 - 📅 **User-Specific Links**: Users can view all the URLs they have shortened after logging in.
 - 🛠️ **Analytics**: Links track how many clicks they’ve received in real-time.
+- 🎁 **Free Limit**: New users receive a certain number of free URL shorteners upon registration.
+- 💳 **Payment Integration**: Integrated with Razorpay to allow users to pay a fee once they exceed their free limit, ensuring continued access to the service.
 
 ## 🛠️ Tech Stack
 

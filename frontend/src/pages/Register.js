@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Register.css"
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -18,7 +19,7 @@ const Register = () => {
       alert("User registered successfully");
       navigate("/login");
     } catch (error) {
-      setError("Registration failed");
+      setError((error.response.data.msg).toUpperCase());
     }
   };
   const goToLoginPage=()=>{
@@ -28,7 +29,7 @@ const Register = () => {
     <div className="body">
       <div className="login-container">
         <h2>Register</h2>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p className="Regfailed" style={{ color: "red" }}>{error}</p>}
         <form onSubmit={handleRegister}>
           <div className="form-group">
             <label htmlFor="email">Email:</label>

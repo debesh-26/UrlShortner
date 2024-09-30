@@ -14,11 +14,14 @@ const URLShortener = () => {
   const fetchUrls = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("https://urlshortner-2ndt.onrender.com/url/user", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        "https://urlshortner-2ndt.onrender.com/url/user",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setShortenedUrls(response.data); // Set previously created URLs
     } catch (error) {
       console.error("Error fetching URLs:", error);
@@ -118,6 +121,7 @@ const URLShortener = () => {
             "Payment successful! You can now continue creating short URLs."
           );
           setLimitExceeded(false); // Reset the limit exceeded state
+          
         },
         theme: {
           color: "#3399cc",
@@ -187,15 +191,15 @@ const URLShortener = () => {
   const closePopup = () => {
     setShowPopup(false); // Close popup on button click
   };
-
- 
-  
-
   return (
     <div className="url-shortener">
       <div className="box">
-        <h2 >Paste the URL to be shortened </h2>
-        {error && <p className="error" style={{ color: "red" }}>{error}</p>}
+        <h2>Paste the URL to be shortened </h2>
+        {error && (
+          <p className="error" style={{ color: "red" }}>
+            {error}
+          </p>
+        )}
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -203,7 +207,9 @@ const URLShortener = () => {
             value={url}
             onChange={(e) => setUrl(e.target.value)}
           />
-          <button type="submit" className="btn">Shorten Now!</button>
+          <button type="submit" className="btn">
+            Shorten Now!
+          </button>
         </form>
       </div>
       {showPopup && limitExceeded && (
@@ -212,7 +218,9 @@ const URLShortener = () => {
             <button className="close-button" onClick={closePopup}>
               &times;
             </button>
-            <p className="msg">Your free limit is exceeded. Please make a payment to continue.</p>
+            <p className="msg">
+              Your free limit is exceeded. Please make a payment to continue.
+            </p>
             <button
               onClick={handlePayment}
               disabled={paymentProcessing}

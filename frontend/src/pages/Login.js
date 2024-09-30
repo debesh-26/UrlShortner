@@ -17,10 +17,17 @@ const Login = ({ setisAuthenticated }) => {
         password,
       });
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("urlLimit",response.data.user.urlLimit)
+      
+      
       setisAuthenticated(true);
       navigate("/");
+      
+      
     } catch (error) {
-      setError("Login failed");
+      console.log(error);
+      
+      setError((error.response.data.msg+" Please Register").toUpperCase());
     }
   };
   const goToRegisterinPage=()=>{
@@ -31,7 +38,7 @@ const Login = ({ setisAuthenticated }) => {
     <div className="body">
       <div className="login-container">
         <h2>Login</h2>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p className="loginFailed" style={{ color: "red" }}>{error}</p>}
         <form onSubmit={handleLogin}>
           <div className="form-group">
             <label htmlFor="email">Email:</label>

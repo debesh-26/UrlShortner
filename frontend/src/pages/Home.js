@@ -6,18 +6,24 @@ import { FaRegThumbsUp } from "react-icons/fa";
 
 const Home = () => {
   const [isauthenticated, setisAuthenticated] = useState(false);
+  const [urlLimit,seturlLimit]=useState(0);
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const limit=localStorage.getItem("urlLimit")
+    seturlLimit(limit);
+    
     if (token) {
       setisAuthenticated(true);
     }
   }, []);
-
+ 
+ 
   return (
     <>
       <Header
         setisAuthenticated={setisAuthenticated}
         isauthenticated={isauthenticated}
+        urlLimit={urlLimit}
       />
       {isauthenticated ? (
         <URLShortener />

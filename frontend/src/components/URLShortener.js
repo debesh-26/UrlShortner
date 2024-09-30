@@ -256,12 +256,12 @@ const URLShortener = () => {
             <tr key={index}>
               <td>
                 <a
-                  href={`http://localhost:3000/${url.shortid}`}
+                  href={`https://urlshortner-2ndt.onrender.com/${url.shortid}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => handleLinkClick(url.shortid)}
                 >
-                  {`http://localhost:3000/${url.shortid}`}
+                  {`https://urlshortner-2ndt.onrender.com/${url.shortid}`}
                 </a>
               </td>
               <td>{url.redirectUrl}</td>

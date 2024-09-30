@@ -25,7 +25,6 @@ const Login = ({ setisAuthenticated }) => {
       
       
     } catch (error) {
-      console.log(error);
       
       setError((error.response.data.msg+" Please Register").toUpperCase());
     }

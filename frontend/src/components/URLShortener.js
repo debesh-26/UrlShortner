@@ -22,7 +22,7 @@ const URLShortener = () => {
           },
         }
       );
-      setShortenedUrls(response.data); // Set previously created URLs
+      setShortenedUrls(response.data); // Seting previously created URLs
     } catch (error) {
       console.error("Error fetching URLs:", error);
     }
@@ -59,7 +59,7 @@ const URLShortener = () => {
         setShowPopup(true);
       } else {
         const newShortenedUrl = {
-          _id: response.data._id, // Generate a temporary ID
+          _id: response.data._id, // Generating a temporary ID
           shortid: response.data.shortid,
           redirectUrl: response.data.redirectUrl, // URL entered by the user
           visitedHistory: [], // No clicks initially
@@ -98,14 +98,13 @@ const URLShortener = () => {
       }
 
       const options = {
-        key: process.env.REACT_APP_RAZORPAY_KEY_ID, // Use Razorpay key from .env
+        key: process.env.REACT_APP_RAZORPAY_KEY_ID, 
         amount: response.data.amount,
         currency: "INR",
         name: "URL Shortener Premium Plan",
         description: "Payment for exceeding the free limit",
-        order_id: response.data.orderId, // Razorpay order ID
+        order_id: response.data.orderId, 
         handler: async function (paymentResponse) {
-          // Handle the payment success
           await axios.post(
             "https://urlshortner-2ndt.onrender.com/payment/payment-success",
             {
@@ -120,8 +119,7 @@ const URLShortener = () => {
           alert(
             "Payment successful! You can now continue creating short URLs."
           );
-          setLimitExceeded(false); // Reset the limit exceeded state
-          
+          setLimitExceeded(false); 
         },
         theme: {
           color: "#3399cc",
@@ -189,7 +187,7 @@ const URLShortener = () => {
     }
   };
   const closePopup = () => {
-    setShowPopup(false); // Close popup on button click
+    setShowPopup(false); 
   };
   return (
     <div className="url-shortener">
@@ -240,44 +238,46 @@ const URLShortener = () => {
       >
         Your Generated Urls Are Here
       </p>
-      <table className="shortened-urls">
-        <thead>
-          <tr>
-            <th>Short Link</th>
-            <th>Original Link</th>
-            <th>Clicks</th>
-            <th>Status</th>
-            <th>Date</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          {shortenedUrls.map((url, index) => (
-            <tr key={index}>
-              <td>
-                <a
-                  href={`https://urlshortner-2ndt.onrender.com/${url.shortid}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => handleLinkClick(url.shortid)}
-                >
-                  {`https://urlshortner-2ndt.onrender.com/${url.shortid}`}
-                </a>
-              </td>
-              <td>{url.redirectUrl}</td>
-              <td>{url.visitedHistory.length}</td>
-              <td>Active</td> {/* Assuming all URLs are active */}
-              <td>{new Date(url.createdAt).toLocaleDateString()}</td>
-              <td>
-                <MdDeleteForever
-                  className="icons"
-                  onClick={() => handleDelete(url._id)}
-                />
-              </td>
+      <div className="shortened-urls-wrapper">
+        <table className="shortened-urls">
+          <thead>
+            <tr>
+              <th>Short Link</th>
+              <th>Original Link</th>
+              <th>Clicks</th>
+              <th>Status</th>
+              <th>Date</th>
+              <th>Delete</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {shortenedUrls.map((url, index) => (
+              <tr key={index}>
+                <td>
+                  <a
+                    href={`https://urlshortner-2ndt.onrender.com/${url.shortid}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => handleLinkClick(url.shortid)}
+                  >
+                    {`https://urlshortner-2ndt.onrender.com/${url.shortid}`}
+                  </a>
+                </td>
+                <td>{url.redirectUrl}</td>
+                <td>{url.visitedHistory.length}</td>
+                <td>Active</td>
+                <td>{new Date(url.createdAt).toLocaleDateString()}</td>
+                <td>
+                  <MdDeleteForever
+                    className="icons"
+                    onClick={() => handleDelete(url._id)}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

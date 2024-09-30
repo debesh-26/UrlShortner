@@ -274,20 +274,32 @@
   background-color: #1e9db4;
 }
 
-.shortened-urls {
-  margin-top: 2rem;
-  width: 100%;
-  max-width: 800px;
-  border-collapse: collapse;
-  margin-bottom: 2rem;
+
+.shortened-urls-wrapper {
+  /* width: 100%; */
   overflow-x: auto;
 }
 
+.shortened-urls {
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  overflow-x: auto;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+
 .shortened-urls th,
 .shortened-urls td {
-  padding: 0.75rem;
+  padding: 0.5rem;
   border: 1px solid #ccc;
-  text-align: center;
+  text-align: left;
+  white-space: nowrap; /* Prevent text wrapping within cells */
+  max-width: 200px; /* Limit max-width to avoid table overflow */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Add ellipsis for overflowing content */
 }
 
 .shortened-urls th {
@@ -296,9 +308,10 @@
 }
 
 .shortened-urls td a {
-  color: #1f8eb9;
-  text-decoration: none;
-  transition: color 0.3s ease;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Add ellipsis for long URLs */
 }
 
 .shortened-urls td a:hover {
@@ -410,7 +423,12 @@
     font-size: 0.875rem;
     padding: 0.5rem;
   }
+  .shortened-urls-wrapper {
+    width: 100%;
+    overflow-x: auto;
+  }
 }
+
 
 /* Popup animation */
 @keyframes popupFadeIn {

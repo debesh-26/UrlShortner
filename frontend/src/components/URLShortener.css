@@ -6,70 +6,69 @@
   justify-content: center;
 }
 
-.box{
+.box {
   width: 80vw;
-  border-radius: 6px; 
+  border-radius: 6px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
   padding: 1rem 0rem;
-
 }
-.error{
+.error {
   text-align: center;
   margin-bottom: 20px;
 }
-  
-  .url-shortener h2 {
-    font-size: 1.5rem;
-  }
-  
-  .url-shortener form {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1rem;
-  }
-  
-  .url-shortener input {
-    padding: 0.5rem;
-    width: 60%;
-  }
-  
-  .btn {
-    padding: 0.5rem 1rem;
-    background-color: rgb(31, 169, 185);
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .shortened-urls {
-    margin-top: 2rem;
-    width: 80vw;
-    border-collapse: collapse;
-    margin-bottom: 2rem;
-  }
-  
-  .shortened-urls th, .shortened-urls td {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-  }
-  
-  .shortened-urls td {
-    text-align: center;
-  }
-  
-  .icons {
-    color: black;
-    font-size: 1.5em;
-    transition: color 0.2s ease;
-  }
-  
-  .icons:hover {
-    color: red;
-    cursor: pointer;
-  }
 
+.url-shortener h2 {
+  font-size: 1.5rem;
+}
 
-  * For Popup Overlay */
+.url-shortener form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.url-shortener input {
+  padding: 0.5rem;
+  width: 60%;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  background-color: rgb(31, 169, 185);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.shortened-urls {
+  margin-top: 2rem;
+  width: 80vw;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+.shortened-urls th,
+.shortened-urls td {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+}
+
+.shortened-urls td {
+  text-align: center;
+}
+
+.icons {
+  color: black;
+  font-size: 1.5em;
+  transition: color 0.2s ease;
+}
+
+.icons:hover {
+  color: red;
+  cursor: pointer;
+}
+
+/* For Popup Overlay */
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -203,12 +202,12 @@
   }
 }
 
-.msg{
-  font-size:large;
+.msg {
+  font-size: large;
   font-weight: 500;
 }
 
-.NoUrl{
+.NoUrl {
   margin-top: 200px;
   font-weight: 600;
   font-size: large;

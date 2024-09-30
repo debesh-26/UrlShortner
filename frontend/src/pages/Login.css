@@ -6,6 +6,10 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background: linear-gradient(45deg, #042632, #253538, #1a1e23, #bcf3f0);
+    background-size: 300% 300%;
+    animation: gradient-animation 10s ease infinite;
+
 }
 
 .login-container {
@@ -59,4 +63,16 @@ button:hover {
 
 .loginFailed{
     text-align: center;
+}
+
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }

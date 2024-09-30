@@ -28,7 +28,7 @@ const Home = () => {
       {isauthenticated ? (
         <URLShortener />
       ) : (
-        <div className="body">
+        <div className="bodyy">
           <h3>Sign Up for Free and Manage Your Links</h3>
           <h1>"Shorten Your First <b className="free">5 Free</b> Link Now with ClipLink !"</h1>
           <div className="mainbody">

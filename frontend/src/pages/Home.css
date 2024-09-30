@@ -1,5 +1,5 @@
 /* Body styling with background animation */
-.body {
+.bodyy {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -8,9 +8,11 @@
     background: linear-gradient(45deg, #042632, #253538, #1a1e23, #bcf3f0);
     background-size: 300% 300%;
     animation: gradient-animation 10s ease infinite;
+    padding: 1rem;/* Center align text for smaller devices */
+    text-align: center;
 }
 
-.free{
+.free {
     color: rgb(157, 58, 58);
 }
 
@@ -20,6 +22,7 @@
     width: 50vw;
     align-items: center;
     justify-content: center;
+    margin-top: 2rem;
 }
 
 h4 {
@@ -27,12 +30,12 @@ h4 {
 }
 
 p {
-    font-size: 14px;
+    font-size: 1rem; /* Adjusted font-size for better readability */
 }
 
 h3 {
     color: rgb(31, 169, 185);
-    font-size: 1.8rem;
+    font-size: 2rem;
     text-align: center;
 }
 
@@ -44,6 +47,7 @@ h3 {
     align-items: center;
     justify-content: center;
     color: rgb(124, 169, 174);
+    font-size: 3rem; /* Icon size adjusted for better scaling */
 }
 
 /* Main content block */
@@ -53,6 +57,7 @@ h3 {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    padding-left: 1rem;
 }
 
 /* Keyframes for background gradient animation */
@@ -65,5 +70,96 @@ h3 {
     }
     100% {
         background-position: 0% 50%;
+    }
+}
+
+/* Responsive Design: */
+
+/* For small devices (phones) */
+@media (max-width: 600px) {
+    .bodyy {
+        padding: 1rem;
+        height: auto; /* Allow content to extend if needed */
+        background-size: 400% 400%;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+    }
+
+    h4 {
+        font-size: 1.2rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+
+    .mainbody {
+        flex-direction: column; /* Stack elements vertically on small screens */
+        width: 100%;
+    }
+
+    .icon {
+        font-size: 2.5rem;
+        height: auto;
+    }
+
+    .mainbody1 {
+        padding-left: 0;
+        text-align: center;
+        margin-top: 1rem;
+    }
+}
+
+/* For tablets and medium devices */
+@media (max-width: 768px) {
+    .bodyy {
+        padding: 1.5rem;
+        background-size: 300% 300%;
+    }
+
+    h3 {
+        font-size: 1.7rem;
+        margin-top: 5.5rem;
+    }
+
+    h4 {
+        font-size: 1.4rem;
+    }
+
+    p {
+        font-size: 0.95rem;
+    }
+
+    .mainbody {
+        width: 80%;
+    }
+
+    .icon {
+        font-size: 2.8rem;
+    }
+}
+
+/* For large devices (desktops) */
+@media (min-width: 1024px) {
+    .bodyy {
+        background-size: 300% 300%;
+    }
+
+    h3 {
+        font-size: 2rem;
+    }
+
+    h4 {
+        font-size: 1.6rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    .mainbody {
+        width: 50vw;
     }
 }

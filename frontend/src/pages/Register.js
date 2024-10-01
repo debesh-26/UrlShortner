@@ -7,10 +7,14 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const[loading,setloading]=useState(false);
+
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setloading(true)
+
     try {
       await axios.post("https://urlshortner-2ndt.onrender.com/auth/register", {
         email,
@@ -20,6 +24,8 @@ const Register = () => {
       navigate("/login");
     } catch (error) {
       setError((error.response.data.msg).toUpperCase());
+    }finally{
+      setloading(false);
     }
   };
   const goToLoginPage=()=>{
@@ -30,7 +36,11 @@ const Register = () => {
       <div className="login-container">
         <h2>Register</h2>
         {error && <p className="Regfailed" style={{ color: "red" }}>{error}</p>}
-        <form onSubmit={handleRegister}>
+
+        {loading && <div className="loader-overlay" >
+          <div className="loader"></div>
+        </div>}
+        <form onSubmit={handleRegister} className={loading ? "dimmed" : ""}>
           <div className="form-group">
             <label htmlFor="email">Email:</label>
             <input

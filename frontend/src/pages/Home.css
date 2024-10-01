@@ -6,7 +6,7 @@
     align-items: center;
     height: 100vh; /* Ensure full viewport height */
     background: linear-gradient(45deg, #042632, #253538, #1a1e23, #bcf3f0);
-    background-size: 300% 300%;
+    background-size: 400% 400%;
     animation: gradient-animation 10s ease infinite;
     padding: 1rem;/* Center align text for smaller devices */
     text-align: center;
@@ -15,7 +15,12 @@
 .free {
     color: rgb(157, 58, 58);
 }
-
+.bodyy h1{
+    color: #a2b5bf;;
+}
+p{
+    color: #848383;
+}
 /* Main content styling */
 .mainbody {
     display: flex;
@@ -66,7 +71,7 @@ h3 {
         background-position: 0% 50%;
     }
     50% {
-        background-position: 100% 50%;
+        background-position: 100% 40%;
     }
     100% {
         background-position: 0% 50%;

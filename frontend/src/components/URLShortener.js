@@ -10,8 +10,10 @@ const URLShortener = () => {
   const [limitExceeded, setLimitExceeded] = useState(false);
   const [paymentProcessing, setPaymentProcessing] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const fetchUrls = async () => {
+    setLoading(true);
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
@@ -25,6 +27,8 @@ const URLShortener = () => {
       setShortenedUrls(response.data); // Seting previously created URLs
     } catch (error) {
       console.error("Error fetching URLs:", error);
+    } finally {
+      setLoading(false); // Hide loader after fetching
     }
   };
 
@@ -40,7 +44,7 @@ const URLShortener = () => {
       alert("URL is required");
       return;
     }
-
+    setLoading(true);
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
@@ -73,6 +77,8 @@ const URLShortener = () => {
       }
     } catch (error) {
       setError("Failed to shorten the URL");
+    } finally {
+      setLoading(false); // Hide loader after shortening
     }
   };
 
@@ -98,12 +104,12 @@ const URLShortener = () => {
       }
 
       const options = {
-        key: process.env.REACT_APP_RAZORPAY_KEY_ID, 
+        key: process.env.REACT_APP_RAZORPAY_KEY_ID,
         amount: response.data.amount,
         currency: "INR",
         name: "URL Shortener Premium Plan",
         description: "Payment for exceeding the free limit",
-        order_id: response.data.orderId, 
+        order_id: response.data.orderId,
         handler: async function (paymentResponse) {
           await axios.post(
             "https://urlshortner-2ndt.onrender.com/payment/payment-success",
@@ -119,7 +125,7 @@ const URLShortener = () => {
           alert(
             "Payment successful! You can now continue creating short URLs."
           );
-          setLimitExceeded(false); 
+          setLimitExceeded(false);
         },
         theme: {
           color: "#3399cc",
@@ -171,6 +177,7 @@ const URLShortener = () => {
 
   //deleting the url
   const handleDelete = async (id) => {
+    setLoading(true);
     try {
       const token = localStorage.getItem("token");
 
@@ -184,14 +191,21 @@ const URLShortener = () => {
       setShortenedUrls(updatedUrl);
     } catch (error) {
       console.error("Error deleting URL", error);
+    } finally {
+      setLoading(false); // Hide loader after deletion
     }
   };
   const closePopup = () => {
-    setShowPopup(false); 
+    setShowPopup(false);
   };
   return (
     <div className="url-shortener">
-      <div className="box">
+       {loading && (
+        <div className="loader-overlay">
+          <div className="loader"></div>
+        </div>
+      )}
+      <div className={`box ${loading ? 'dimmed' : ''}`} >
         <h2>Paste the URL to be shortened </h2>
         {error && (
           <p className="error" style={{ color: "red" }}>

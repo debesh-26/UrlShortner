@@ -7,10 +7,12 @@ const Login = ({ setisAuthenticated }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const[loading,setloading]=useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setloading(true)
     try {
       const response = await axios.post("https://urlshortner-2ndt.onrender.com/auth/login", {
         email,
@@ -27,6 +29,8 @@ const Login = ({ setisAuthenticated }) => {
     } catch (error) {
       
       setError((error.response.data.msg+" Please Register").toUpperCase());
+    }finally{
+      setloading(false);
     }
   };
   const goToRegisterinPage=()=>{
@@ -38,7 +42,12 @@ const Login = ({ setisAuthenticated }) => {
       <div className="login-container">
         <h2>Login</h2>
         {error && <p className="loginFailed" style={{ color: "red" }}>{error}</p>}
-        <form onSubmit={handleLogin}>
+
+        {loading && <div className="loader-overlay">
+          <div className="loader"></div>
+        </div>}
+
+        <form onSubmit={handleLogin} className={loading ? "dimmed" : ""}>
           <div className="form-group">
             <label htmlFor="email">Email:</label>
             <input
@@ -48,6 +57,7 @@ const Login = ({ setisAuthenticated }) => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              disabled={loading}
             />
           </div>
           <div className="form-group">
@@ -59,12 +69,13 @@ const Login = ({ setisAuthenticated }) => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              disabled={loading}
             />
           </div>
-          <button type="submit" className="button">
+          <button type="submit" className="button" disabled={loading}>
             Login
           </button>
-          <button type="submit" className="button" onClick={goToRegisterinPage}>
+          <button type="submit" className="button" onClick={goToRegisterinPage} disabled={loading}>
             Don't have a account ? Register Here
           </button>
         </form>

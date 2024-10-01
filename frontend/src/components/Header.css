@@ -1,34 +1,4 @@
-/* .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 0.5rem;
-    background-color: rgb(31, 169, 185);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000; 
-    height: 70px;
-  }
-  
-  .auth-buttons button {
-    margin-left: 1rem;
-    padding: 0.6rem 1rem;
-    border: none;
-    background-color: #101110;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-    width: 100px;
-  }
 
-  .auth-buttons button:hover{
-    background-color: #272827;
-  }
-   */
-
-/* General header styles */
 .header {
   display: flex;
   justify-content: space-between;
@@ -44,20 +14,20 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Logo (h1) styles */
+
 .header h1 {
   font-size: 2rem;
   color: white;
   margin: 0;
 }
 
-/* Button container styles */
+
 .auth-buttons {
   display: flex;
   align-items: center;
 }
 
-/* Button styles */
+
 .auth-buttons button {
   margin-left: 1rem;
   padding: 0.6rem 1.2rem;
@@ -65,7 +35,7 @@
   background-color: #101110;
   color: white;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 20px;
   transition: background-color 0.3s ease;
 }
 
@@ -73,16 +43,13 @@
   background-color: #272827;
 }
 
-/* URL limit text */
 .url-limit {
   font-size: 1rem;
   color: white;
   margin-right: 1rem;
 }
 
-/* Media Queries for Responsive Design */
 
-/* Small devices (phones in portrait mode) */
 @media (max-width: 600px) {
   .header h1 {
       font-size: 1.5rem;
@@ -99,14 +66,13 @@
   }
 }
 
-/* Medium devices (tablets) */
 @media (max-width: 768px) {
   .header {
-      padding: 0 0.2rem;
+      padding: 0.1rem 0.5rem;
   }
 
   .header h1 {
-      font-size: 1.8rem;
+      font-size: 1.9rem;
   }
 
   .auth-buttons button {
@@ -120,7 +86,6 @@
   }
 }
 
-/* Large devices (desktops) */
 @media (min-width: 1024px) {
   .header {
       padding: 0 2rem;
